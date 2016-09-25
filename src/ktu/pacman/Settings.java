@@ -7,8 +7,40 @@ package ktu.pacman;
 
 /**
  *
- * @author Justinas
+ * @author Danielius
  */
 public class Settings {
+    private static Settings instance = null;
     
+    private Settings() {}
+    private static Boolean sound;
+    private static int[] sizeXY = new int[2];
+    
+    public static Settings getInstance()
+    {
+        if(instance == null) {
+            instance = new Settings();
+        }
+        return instance;
+    }
+    
+    public void soundSet ( Boolean soundB )
+    {
+        sound = soundB;
+    }
+    
+    public Boolean soundGet ()
+    {
+        return sound;
+    }
+    
+    public void sizeSet ( int[] sizeA )
+    {
+        sizeXY = sizeA;
+    }
+    
+    public int[] sizeGet ()
+    {
+        return sizeXY;
+    }
 }
