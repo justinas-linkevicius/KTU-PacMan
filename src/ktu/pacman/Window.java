@@ -19,9 +19,11 @@ import javax.swing.JTextArea;
 public class Window extends JFrame {
     JTextArea textArea;
     
-    public Window() throws HeadlessException {
+    public Window() throws HeadlessException
+    {
+        Logger logger = Logger.getInstance();
+        
         setTitle("Pacman");
-         setTitle("Pacman");
         
         Settings settings = null;
         settings = settings.getInstance();
@@ -39,9 +41,7 @@ public class Window extends JFrame {
         textArea.setFont(new Font("Courier New", Font.BOLD, 14));
         getContentPane().add(textArea);
         
-        
         // Change textArea to a more appropriate size.
-        
         char[][] board = Board.getNewBoard();
         textArea.setRows(board[0].length);
         textArea.setColumns(board.length);
@@ -68,6 +68,6 @@ public class Window extends JFrame {
         // This will get replaced eventually when our game loads:
         textArea.setText("Loading....");        
         
-        Logger.getInstance().log("window loading");
+        logger.log("window loading");
     }
 }
