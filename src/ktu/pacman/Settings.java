@@ -13,8 +13,9 @@ public class Settings {
     private static Settings instance = null;
     
     private Settings() {}
-    private static Boolean sound;
-    private static int[] sizeXY = new int[2];
+    private static Boolean sound = true;
+    private static int sizeX = 514;
+    private static int sizeY = 512;
     
     public static Settings getInstance()
     {
@@ -34,13 +35,14 @@ public class Settings {
         return sound;
     }
     
-    public void sizeSet ( int[] sizeA )
+    public int getSizeX ( )
     {
-        sizeXY = sizeA;
+        return sizeX;
     }
     
-    public int[] sizeGet ()
+    public int getSizeY ( )
     {
-        return sizeXY;
+        return sizeY;
     }
+    
 }

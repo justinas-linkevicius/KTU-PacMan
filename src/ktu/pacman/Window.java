@@ -21,7 +21,13 @@ public class Window extends JFrame {
     
     public Window() throws HeadlessException {
         setTitle("Pacman");
-        setSize(500,500);
+         setTitle("Pacman");
+        
+        Settings settings = null;
+        settings = settings.getInstance();
+        setSize(settings.getSizeX(), settings.getSizeY());
+        Sound sound = new Sound();
+        
         setLocationRelativeTo(null); // This centers the window on the screen.
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Quit app when window closes.
 
