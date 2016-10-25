@@ -24,10 +24,12 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
 {
     private PacMan pacman;
     
-       private int cellWidth  = 20;
+    private GameMap map;
+   
+    //private String[] map;
+    
+      private int cellWidth  = 20;
       private int cellHeight = 20;
-      
-      
       
       private Point testMovingPos = new Point(10, 40);
            
@@ -38,19 +40,9 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       public GameMapPanel()
       {
         //addKeyListener(this);
+        //fillCells = new ArrayList<>(25);
         
-        fillCells = new ArrayList<>(25);
-        
-        cells = new ArrayList<MapPoint>();
-        
-        /*
-        cells.add( new MapPoint(10, 10, Color.YELLOW ) );
-        cells.add( new MapPoint(10, 10, Color.RED ) );
-        cells.add( new MapPoint(20, 20, Color.CYAN ) );
-        cells.add( new MapPoint(30, 30, Color.MAGENTA ) );
-        */
-        
-        String[] map = 
+        this.map = new GameMap(new String[]
         { 
             "111111111111111111111111111111111111111",
             "1                                     1",
@@ -91,51 +83,13 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
             "1     .                               1",
             "1                                     1",
             "111111111111111111111111111111111111111"
-        };
+        });
         
-          System.out.println("map size: " +  map.length + "x" +  map[0].length() );
+        this.cells = new ArrayList<MapPoint>();
+ 
+        System.out.println("map size: " +  map.width() + "x" +  map.height() );
         
-        for(int i = 0; i < map.length; i++)
-            for(int j = 0; j < map[0].length(); j++)
-            {
-                // walls
-                if(map[i].charAt(j) == '1')
-                {
-                    cells.add( new MapPoint(j, i, Color.BLACK ) );
-                }
-                
-                // pacman
-                if(map[i].charAt(j) == '*')
-                {
-                    cells.add( new MapPoint(j, i, Color.YELLOW ) );
-                    
-                    this.pacman = new PacMan(j, i);
-                }
-                
-                // enemies
-                if(map[i].charAt(j) == 'p')
-                {
-                    cells.add( new MapPoint(j, i, Color.PINK ) );
-                }
-                if(map[i].charAt(j) == 'b')
-                {
-                    cells.add( new MapPoint(j, i, Color.RED ) );
-                }
-                if(map[i].charAt(j) == 'i')
-                {
-                    cells.add( new MapPoint(j, i, Color.CYAN ) );
-                }
-                if(map[i].charAt(j) == 'c')
-                {
-                    cells.add( new MapPoint(j, i, Color.ORANGE ) );
-                }
-                
-                // power pellets
-                if(map[i].charAt(j) == '.')
-                {
-                    cells.add( new MapPoint(j, i, Color.GREEN, "■" ) );
-                }
-            }
+        this.pacman = new PacMan(this.map);
         
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(this);
@@ -151,22 +105,22 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 case KeyEvent.VK_UP:
                     // handle up 
                     pacman.up();
-                    cells.add( pacman.makeMapPoint() );
+                    //cells.add( pacman.makeMapPoint() );
                 break;
                 case KeyEvent.VK_DOWN:
                     // handle down 
                     pacman.down();
-                    cells.add( pacman.makeMapPoint() );
+                    //cells.add( pacman.makeMapPoint() );
                 break;
                 case KeyEvent.VK_LEFT:
                     // handle left
                     pacman.left();
-                    cells.add( pacman.makeMapPoint() );
+                    //cells.add( pacman.makeMapPoint() );
                 break;
                 case KeyEvent.VK_RIGHT:
                     // handle right
                     pacman.right();
-                    cells.add( pacman.makeMapPoint() );
+                    //cells.add( pacman.makeMapPoint() );
                 break;
              }
 
@@ -182,7 +136,48 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       
       public void update() 
       {
-          System.out.println("Updating Game");
+        System.out.println("Updating Game");
+          
+        cells.clear();
+        for(int i = 0; i < map.height(); i++)
+            for(int j = 0; j < map.width(); j++)
+            {
+                // walls
+                if(map.get(i,j) == '1')
+                {
+                    cells.add( new MapPoint(j, i, Color.BLACK ) );
+                }
+                
+                // pacman
+                if(map.get(i,j) == '*')
+                {
+                    cells.add( new MapPoint(j, i, Color.YELLOW ) );
+                }
+                
+                // enemies
+                if(map.get(i,j) == 'p')
+                {
+                    cells.add( new MapPoint(j, i, Color.PINK ) );
+                }
+                if(map.get(i,j) == 'b')
+                {
+                    cells.add( new MapPoint(j, i, Color.RED ) );
+                }
+                if(map.get(i,j) == 'i')
+                {
+                    cells.add( new MapPoint(j, i, Color.CYAN ) );
+                }
+                if(map.get(i,j) == 'c')
+                {
+                    cells.add( new MapPoint(j, i, Color.ORANGE ) );
+                }
+                
+                // power pellets
+                if(map.get(i,j) == '.')
+                {
+                    cells.add( new MapPoint(j, i, Color.GREEN, "■" ) );
+                }
+            }
       }
       
       public void fillCell(int x, int y) {
@@ -244,11 +239,11 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         
         //g.drawRect(10, 10, 800, 500);
         
-        
+        /*
         Random rand = new Random();
         int randomX = 0 + rand.nextInt((500 - 0) + 1);
         int randomY = 0 + rand.nextInt((500 - 0) + 1);
-        
+        */
          //g.drawRect(this.cellWidth, this.cellHeight, randomX, randomY);
         
         

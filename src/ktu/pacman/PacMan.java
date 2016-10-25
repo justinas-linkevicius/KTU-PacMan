@@ -15,9 +15,30 @@ import java.awt.Point;
 public class PacMan
 {
     public Point position;
-
-    public PacMan(int x, int y) {
-        this.position = new Point(x, y);
+    public GameMap map;
+    
+    public PacMan(GameMap map)
+    {
+        this.map = map;
+        this.findPacman();
+    }
+    
+    public void findPacman()
+    {
+        boolean found = false;
+        
+        for(int i = 0; i < map.map.length; i++)
+            for(int j = 0; j < map.map[0].length; j++)
+                if(map.map[i][j] == '*')
+                {
+                    this.position = new Point(i,j);
+                    found = true;
+                }
+                 
+        if(!found)
+            System.out.println("pacman not found in map string");
+        else
+            System.out.println("pacman found: " + this.position.x + "x" + this.position.y );
     }
     
     public int x()
@@ -42,22 +63,30 @@ public class PacMan
     
     public void up()
     {
-        this.position.y--;
+        this.map.set(position, ' ');
+        this.position.x--;
+        this.map.set(position, '*');
     }
     
     public void down()
     {
-        this.position.y++;
+        this.map.set(position, ' ');
+        this.position.x++;
+        this.map.set(position, '*');
     }
     
     public void left()
     {
-        this.position.x--;
+        this.map.set(position, ' ');
+        this.position.y--;
+        this.map.set(position, '*');
     }
     
     public void right()
     {
-        this.position.x++;
+        this.map.set(position, ' ');
+        this.position.y++;
+        this.map.set(position, '*');
     }
     
     public MapPoint makeMapPoint()
