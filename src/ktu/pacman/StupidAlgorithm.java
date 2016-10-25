@@ -7,8 +7,13 @@ package ktu.pacman;
 
 /**
  *
- * @author Justinas
+ * @author LtDanis
  */
-public class ShortestPath {
+public class StupidAlgorithm implements IBehaviorAlgorithm {
+
+    @Override
+    public void move( Integer d) {
+       Logger.getInstance().log("Stupid");
+    }
     
 }

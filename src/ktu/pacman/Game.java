@@ -5,6 +5,8 @@
  */
 package ktu.pacman;
 
+import java.net.MalformedURLException;
+
 /**
  *
  * @author Justinas
@@ -21,7 +23,7 @@ public class Game {
         Window window = new Window();
         window.setVisible(true);
         */
-
+        Sound sound = new Sound();
         GameFrame glt = new GameFrame();
         glt.setVisible(true);
     }

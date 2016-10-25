@@ -9,6 +9,18 @@ package ktu.pacman;
  *
  * @author Justinas
  */
-public class Enemy {
-    
+public class Enemy implements Cloneable
+{
+	IBehaviorAlgorithm ma;
+;
+	
+	private Integer distance;
+	
+	public Enemy(Integer d){
+		distance = d;
+	}
+	
+	public void setMovingAlgorithm(IBehaviorAlgorithm p){
+		ma = p;
+	}
 }
