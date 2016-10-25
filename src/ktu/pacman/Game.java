@@ -18,7 +18,7 @@ public class Game {
      */
     public static void main(String[] args)
     {   
-        Logger.getInstance().log("game starting");
+        Logger.getInstance().log("Game starting");
         /*
         Window window = new Window();
         window.setVisible(true);
