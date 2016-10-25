@@ -17,8 +17,12 @@ public class Game {
     public static void main(String[] args)
     {   
         Logger.getInstance().log("game starting");
-        
+        /*
         Window window = new Window();
         window.setVisible(true);
+        */
+
+        GameFrame glt = new GameFrame();
+        glt.setVisible(true);
     }
 }
