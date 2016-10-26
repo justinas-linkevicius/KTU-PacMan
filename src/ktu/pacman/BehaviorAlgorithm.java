@@ -5,15 +5,13 @@
  */
 package ktu.pacman;
 
+import java.awt.Point;
+
 /**
  *
- * @author LtDanis
+ * @author Justinas
  */
-public class AmbusherAlgorithm implements IBehaviorAlgorithm {
-
-    @Override
-    public void move( Integer d) {
-       Logger.getInstance().log("Ambusher");
-    }
-    
+public interface BehaviorAlgorithm
+{
+    public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos);
 }

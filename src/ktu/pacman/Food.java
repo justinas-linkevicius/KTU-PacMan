@@ -5,15 +5,16 @@
  */
 package ktu.pacman;
 
+import java.awt.Point;
+import java.util.List;
+
 /**
  *
- * @author LtDanis
+ * @author Justinas
  */
-public class StupidAlgorithm implements IBehaviorAlgorithm {
-
-    @Override
-    public void move( Integer d) {
-       Logger.getInstance().log("Stupid");
-    }
-    
+public interface Food
+{
+    public int getValue();
+    public void setValue(int n);
+    public List<Point> findAllFood();
 }

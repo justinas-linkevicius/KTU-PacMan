@@ -44,12 +44,6 @@ public class GameFrame extends JFrame implements ActionListener
       
       this.add(gamePanel, BorderLayout.CENTER);
   
-      /*
-      gamePanel.fillCell(0, 0);
-      gamePanel.fillCell(0, 49);
-      gamePanel.fillCell(79, 49);
-      gamePanel.fillCell(39, 24); 
-*/
       buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
       buttonsPanel.add(startButton);
       buttonsPanel.add(pauseButton);
@@ -63,6 +57,8 @@ public class GameFrame extends JFrame implements ActionListener
       startButton.addActionListener(this);
       quitButton.addActionListener(this);
       pauseButton.addActionListener(this);
+      
+      this.updateGame();
    }
    
    public void actionPerformed(ActionEvent e)

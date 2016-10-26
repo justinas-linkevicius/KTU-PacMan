@@ -11,11 +11,8 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public interface Enemy
+public abstract class MapElementFactory
 {
-    public void findPosition();
-    public Point getPosition();
-    public void setPosition(Point p);
-    public void setBehavior( BehaviorAlgorithm b );
-    public void update();
+    abstract Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos);
+    abstract Food getFood(String foodType, GameMap map);
 }

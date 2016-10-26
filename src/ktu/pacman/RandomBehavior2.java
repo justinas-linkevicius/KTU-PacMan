@@ -11,11 +11,13 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public interface Enemy
+public class RandomBehavior2 implements BehaviorAlgorithm
 {
-    public void findPosition();
-    public Point getPosition();
-    public void setPosition(Point p);
-    public void setBehavior( BehaviorAlgorithm b );
-    public void update();
+    public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
+    {
+        if( currentPos.x > 1 )
+            return DirectionEnum.UP;
+
+        return DirectionEnum.BOTTOM;
+    }
 }

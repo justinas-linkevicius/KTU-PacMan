@@ -19,11 +19,9 @@ public class Game {
     public static void main(String[] args)
     {   
         Logger.getInstance().log("game starting");
-        /*
-        Window window = new Window();
-        window.setVisible(true);
-        */
+        
         Sound sound = new Sound();
+        
         GameFrame glt = new GameFrame();
         glt.setVisible(true);
     }

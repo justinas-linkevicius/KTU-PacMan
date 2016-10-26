@@ -22,36 +22,31 @@ import javax.swing.JPanel;
  */
 public class GameMapPanel extends JPanel implements KeyEventDispatcher
 {
-    private PacMan pacman;
-    
-    private GameMap map;
-   
-    //private String[] map;
-    
+      private PacMan  pacman;
+      private GameMap map;
+
       private int cellWidth  = 20;
       private int cellHeight = 20;
       
-      private Point testMovingPos = new Point(10, 40);
-           
-      private java.util.List<Point> fillCells;
-      
       private java.util.List<MapPoint> cells;
+      
+      private Enemy binky;
+      private Enemy clyde;
+      private Enemy inky;
+      private Enemy pinky;
       
       public GameMapPanel()
       {
-        //addKeyListener(this);
-        //fillCells = new ArrayList<>(25);
-        
         this.map = new GameMap(new String[]
         { 
             "111111111111111111111111111111111111111",
             "1                                     1",
-            "1         pb                          1",
-            "1         ci                          1",
+            "1         p                           1",
+            "1          i                          1",
             "1                                     1",
             "1                                     1",
             "1                                     1",
-            "1                                     1",
+            "1                             c       1",
             "1                                     1",
             "1                                     1",
             "1                                     1",
@@ -75,7 +70,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
             "1                                     1",
             "1                                     1",
             "1                                     1",
-            "1                 *                   1",
+            "1  b              *                   1",
             "1                                     1",
             "1                                     1",
             "1       .                .            1",
@@ -86,11 +81,31 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         });
         
         this.cells = new ArrayList<MapPoint>();
- 
         System.out.println("map size: " +  map.width() + "x" +  map.height() );
         
         this.pacman = new PacMan(this.map);
         
+        // get enemy factory
+        MapElementFactory enemyFactory = MapElementFactoryProducer.getFactory("Enemy");
+        
+        // create enemies
+        this.binky = enemyFactory.getEnemy("binky", map, pacman.position);
+        this.clyde = enemyFactory.getEnemy("clyde", map, pacman.position);
+        this.inky  = enemyFactory.getEnemy("inky",  map, pacman.position);
+        this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position);
+        
+        // strategy - assign algorithm for each enemy
+        this.binky.setBehavior( new RandomBehavior() );
+        this.clyde.setBehavior( new RandomBehavior2() );
+        
+        // get food factory
+        MapElementFactory foodFactory = MapElementFactoryProducer.getFactory("Food");
+        
+        // create food
+        Food dot = foodFactory.getFood("dot", map);
+        Food powerpellet = foodFactory.getFood("powerpellet", map);
+        
+        // add key event dispatcher to register all keystrokes
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(this);
       }
@@ -105,22 +120,18 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 case KeyEvent.VK_UP:
                     // handle up 
                     pacman.up();
-                    //cells.add( pacman.makeMapPoint() );
                 break;
                 case KeyEvent.VK_DOWN:
                     // handle down 
                     pacman.down();
-                    //cells.add( pacman.makeMapPoint() );
                 break;
                 case KeyEvent.VK_LEFT:
                     // handle left
                     pacman.left();
-                    //cells.add( pacman.makeMapPoint() );
                 break;
                 case KeyEvent.VK_RIGHT:
                     // handle right
                     pacman.right();
-                    //cells.add( pacman.makeMapPoint() );
                 break;
              }
 
@@ -137,7 +148,12 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       public void update() 
       {
         System.out.println("Updating Game");
-          
+        
+        this.binky.update();
+        this.clyde.update();
+        //this.binky.update();
+        //this.binky.update();
+        
         cells.clear();
         for(int i = 0; i < map.height(); i++)
             for(int j = 0; j < map.width(); j++)
