@@ -13,7 +13,7 @@ import java.awt.Point;
  */
 
 enum DirectionEnum {
-        UP, UPRIGHT, RIGHT, BOTTOMRIGHT, BOTTOM, BOTTOMLEFT, LEFT, TOPLEFT
+        NONE, UP, UPRIGHT, RIGHT, BOTTOMRIGHT, BOTTOM, BOTTOMLEFT, LEFT, TOPLEFT
 }
 
 // -1:-1 0:-1 1:-1 1:0 1:1 0:1 -1:1 -1:0
@@ -42,6 +42,10 @@ public class Direction {
                     
             case UPRIGHT:
                 p.x--;
+                p.y++;
+            break;
+               
+            case RIGHT:
                 p.y++;
             break;
                 

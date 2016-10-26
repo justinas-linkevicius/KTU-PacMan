@@ -119,19 +119,27 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
             switch( keyCode ) { 
                 case KeyEvent.VK_UP:
                     // handle up 
-                    pacman.up();
+                    //pacman.up();
+                    
+                    pacman.setDirection( DirectionEnum.UP );
+                    
                 break;
                 case KeyEvent.VK_DOWN:
                     // handle down 
-                    pacman.down();
+                    // pacman.down();
+                    
+                    pacman.setDirection( DirectionEnum.BOTTOM );
                 break;
                 case KeyEvent.VK_LEFT:
                     // handle left
-                    pacman.left();
+                    //pacman.left();
+                    pacman.setDirection( DirectionEnum.LEFT );
                 break;
                 case KeyEvent.VK_RIGHT:
                     // handle right
-                    pacman.right();
+                    //pacman.right();
+                    
+                    pacman.setDirection( DirectionEnum.RIGHT );
                 break;
              }
 
@@ -147,12 +155,14 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       
       public void update() 
       {
-        System.out.println("Updating Game");
+        //System.out.println("Updating Game");
         
         this.binky.update();
         this.clyde.update();
         //this.binky.update();
         //this.binky.update();
+        
+        this.pacman.update();
         
         cells.clear();
         for(int i = 0; i < map.height(); i++)

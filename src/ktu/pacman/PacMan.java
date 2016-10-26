@@ -16,11 +16,18 @@ public class PacMan
 {
     public Point position;
     public GameMap map;
+    public DirectionEnum direction;
     
     public PacMan(GameMap map)
     {
         this.map = map;
         this.findPacman();
+        this.setDirection( DirectionEnum.NONE );
+    }
+    
+    public void setDirection( DirectionEnum d )
+    {
+        this.direction = d;
     }
     
     public void findPacman()
@@ -64,33 +71,63 @@ public class PacMan
     public void up()
     {
         this.map.set(position, ' ');
-        this.position.x--;
+        
+        if( this.map.get(position.x-1, position.y) != '1' ) 
+            this.position.x--;
+        
         this.map.set(position, '*');
     }
     
     public void down()
     {
         this.map.set(position, ' ');
-        this.position.x++;
+        
+        if( this.map.get(position.x+1, position.y) != '1' ) 
+            this.position.x++;
+        
         this.map.set(position, '*');
     }
     
     public void left()
     {
         this.map.set(position, ' ');
-        this.position.y--;
+        if( this.map.get(position.x, position.y-1) != '1' ) 
+            this.position.y--;
         this.map.set(position, '*');
     }
     
     public void right()
     {
         this.map.set(position, ' ');
-        this.position.y++;
+        if( this.map.get(position.x, position.y+1) != '1' ) 
+            this.position.y++;
         this.map.set(position, '*');
     }
     
     public MapPoint makeMapPoint()
     {
         return new MapPoint(this.position.x, this.position.y, Color.YELLOW);
+    }
+    
+    public void update()
+    {
+        switch (direction)
+        {
+            case UP:
+                this.up();
+            break;
+                    
+            case RIGHT:
+                this.right();
+            break;
+                
+            case BOTTOM:
+                this.down();
+            break;
+                
+            case LEFT:
+                this.left();
+            break; 
+        }
     }
 }
