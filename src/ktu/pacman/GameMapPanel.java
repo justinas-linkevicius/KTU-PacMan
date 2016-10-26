@@ -143,7 +143,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 break;
              }
 
-            System.out.println("keyPressed();");
+            //System.out.println("keyPressed();");
             
         } else if (e.getID() == KeyEvent.KEY_RELEASED) {
             
@@ -201,7 +201,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 // power pellets
                 if(map.get(i,j) == '.')
                 {
-                    cells.add( new MapPoint(j, i, Color.GREEN, "■" ) );
+                    cells.add( new MapPoint(j, i, Color.GREEN ) );// "■"
                 }
             }
       }
