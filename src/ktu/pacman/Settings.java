@@ -14,8 +14,8 @@ public class Settings {
     
     private Settings() {}
     private static Boolean sound = true;
-    private static int sizeX = 514;
-    private static int sizeY = 512;
+    private static int sizeX = 820;
+    private static int sizeY = 880;
     
     public static Settings getInstance()
     {
@@ -32,7 +32,7 @@ public class Settings {
     
     public Boolean soundGet ()
     {
-        return sound;
+        return sound; 
     }
     
     public int getSizeX ( )

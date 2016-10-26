@@ -12,7 +12,6 @@ import java.awt.Point;
  * @author Justinas
  */
 
-
 enum DirectionEnum {
         UP, UPRIGHT, RIGHT, BOTTOMRIGHT, BOTTOM, BOTTOMLEFT, LEFT, TOPLEFT
 }

@@ -5,8 +5,6 @@
  */
 package ktu.pacman;
 
-import java.net.MalformedURLException;
-
 /**
  *
  * @author Justinas
@@ -18,8 +16,23 @@ public class Game {
      */
     public static void main(String[] args)
     {   
-        Logger.getInstance().log("game starting");
+        LogFactory logFactory = new LogFactory();
         
+        ILogger consoleLogger = logFactory.getLogger("consoleLogger");
+        
+        consoleLogger.log("test");
+        
+        ILogger fl = logFactory.getLogger("fileLogger");
+        
+        fl.log("testFile");
+        
+        ConsoleLogger.getInstance().log("game starting");
+        
+        /*
+        Window window = new Window();
+        window.setVisible(true);
+        */
+
         Sound sound = new Sound();
         
         GameFrame glt = new GameFrame();

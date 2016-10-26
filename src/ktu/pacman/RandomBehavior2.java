@@ -13,6 +13,7 @@ import java.awt.Point;
  */
 public class RandomBehavior2 implements BehaviorAlgorithm
 {
+    // TODO: add Point previousPos
     public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
     {
         if( currentPos.x > 1 )

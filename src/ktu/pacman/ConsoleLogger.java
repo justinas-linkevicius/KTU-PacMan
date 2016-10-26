@@ -10,13 +10,13 @@ package ktu.pacman;
  * @author Justinas
  */
 
-public class Logger
+public class ConsoleLogger implements ILogger
 {
-    private static Logger instance = new Logger();
+    private static ConsoleLogger instance = new ConsoleLogger();
     
-    private Logger() {}
+    private ConsoleLogger() {}
     
-    public static Logger getInstance()
+    public static ConsoleLogger getInstance()
     {
         return instance;
     }

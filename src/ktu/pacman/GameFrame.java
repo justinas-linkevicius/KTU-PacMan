@@ -51,7 +51,10 @@ public class GameFrame extends JFrame implements ActionListener
 
       this.add(buttonsPanel, BorderLayout.SOUTH);
 
-      setSize(820, 880);
+
+      setSize(Settings.getInstance().getSizeX(), Settings.getInstance().getSizeY() );
+      
+    
       
       // action listeners
       startButton.addActionListener(this);

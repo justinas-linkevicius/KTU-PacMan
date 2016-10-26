@@ -18,7 +18,7 @@ public class Sound {
         Settings settings = null;
         settings = settings.getInstance();
         if(settings.soundGet()) {
-            Logger.getInstance().log("SOUND ON");
+            ConsoleLogger.getInstance().log("SOUND ON");
             //new MP3Player(new File("PacmanSoundEffect.mp3")).play();   
                 //MP3Player player = new MP3Player(new File("Pacman.mp3"));
                 //player.play();
