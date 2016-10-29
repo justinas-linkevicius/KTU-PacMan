@@ -201,7 +201,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 // power pellets
                 if(map.get(i,j) == '.')
                 {
-                    cells.add( new MapPoint(j, i, Color.GREEN ) );// "■"
+                    cells.add( new MapPoint(j, i, Color.LIGHT_GRAY ) );// "■"
                 }
             }
       }
