@@ -15,7 +15,7 @@ public class RandomBehavior implements BehaviorAlgorithm
 {
     public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
     {
-        if( currentPos.x < map.height()-2 )
+        if( currentPos.x < map.height()-2 && map.get(currentPos, DirectionEnum.BOTTOM) != '1')
             return DirectionEnum.BOTTOM;
 
         return DirectionEnum.UP;

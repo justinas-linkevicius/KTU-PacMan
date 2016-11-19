@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
+import ktu.pacman.command.*;
 
 /**
  *
@@ -22,6 +23,9 @@ import javax.swing.JPanel;
  */
 public class GameMapPanel extends JPanel implements KeyEventDispatcher
 {
+      // pacman command
+      PacmanControl pacmanControl = new PacmanControl();
+    
       private PacMan  pacman;
       private GameMap map;
 
@@ -40,13 +44,13 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.map = new GameMap(new String[]
         { 
             "111111111111111111111111111111111111111",
-            "1. . . . . . . . . . . . . . . . . .  1",
+            "1. . . . . . . . . . . . . . . . . . $1",
             "1 1 1111111111111111111111111111111 1 1",
-            "1.1                                 1 1",
+            "1.1                 ..              1 1",
             "1 1  1 1  .  1  1                 1 1 1",
             "1.1  1 1     1  1  1pb111111111   1 1 1",
             "1 1  1 1  .  1  1  1ci1 . . . 1   1 1 1",
-            "1.1  1 1     1  1  1111 1111111   1 1 1",
+            "1.1  1 1     1  1  1  1 1111111   1 1 1",
             "1 1  1 1  .  1  1                 1 1 1",
             "1.1  1 1     1  1  111111111111   1 1 1",
             "1 1  1 1  .  1  1  . .  . . . .   1 1 1",
@@ -83,16 +87,20 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.cells = new ArrayList<MapPoint>();
         System.out.println("map size: " +  map.width() + "x" +  map.height() );
         
-        this.pacman = new PacMan(this.map);
+        // observer
+        GameState gameState = new GameState();
         
+        this.pacman = new PacMan(map, gameState);
+  
+        // abstract factory
         // get enemy factory
         MapElementFactory enemyFactory = MapElementFactoryProducer.getFactory("Enemy");
         
         // create enemies
-        this.binky = enemyFactory.getEnemy("binky", map, pacman.position);
-        this.clyde = enemyFactory.getEnemy("clyde", map, pacman.position);
-        this.inky  = enemyFactory.getEnemy("inky",  map, pacman.position);
-        this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position);
+        this.binky = enemyFactory.getEnemy("binky", map, pacman.position, gameState);
+        this.clyde = enemyFactory.getEnemy("clyde", map, pacman.position, gameState);
+        this.inky  = enemyFactory.getEnemy("inky",  map, pacman.position, gameState);
+        this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position, gameState);
         
         // strategy - assign algorithm for each enemy
         this.binky.setBehavior( new RandomBehavior() );
@@ -115,31 +123,38 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         if (e.getID() == KeyEvent.KEY_PRESSED) {
 
             int keyCode = e.getKeyCode();
-        
-            switch( keyCode ) { 
+
+            switch( keyCode ) {
+                case KeyEvent.VK_U:
+                    // handle undo 
+                    pacmanControl.undo();
+                    
+                    System.out.println("undo");
+                break;
+                
                 case KeyEvent.VK_UP:
                     // handle up 
-                    //pacman.up();
+                    //pacman.setDirection( DirectionEnum.UP );
                     
-                    pacman.setDirection( DirectionEnum.UP );
-                    
+                    pacmanControl.moveUp(pacman);
                 break;
                 case KeyEvent.VK_DOWN:
                     // handle down 
-                    // pacman.down();
+                    //pacman.setDirection( DirectionEnum.BOTTOM );
                     
-                    pacman.setDirection( DirectionEnum.BOTTOM );
+                    pacmanControl.moveDown(pacman);
                 break;
                 case KeyEvent.VK_LEFT:
                     // handle left
-                    //pacman.left();
-                    pacman.setDirection( DirectionEnum.LEFT );
+                    //pacman.setDirection( DirectionEnum.LEFT );
+                    
+                    pacmanControl.moveLeft(pacman);
                 break;
                 case KeyEvent.VK_RIGHT:
                     // handle right
-                    //pacman.right();
+                    //pacman.setDirection( DirectionEnum.RIGHT );
                     
-                    pacman.setDirection( DirectionEnum.RIGHT );
+                    pacmanControl.moveRight(pacman);
                 break;
              }
 
@@ -163,6 +178,15 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         //this.binky.update();
         
         this.pacman.update();
+        
+        /*
+          1    - wall
+               - empty
+          .    - pacdot
+          *    - pacman
+          bpic - enemies
+          .$   - power pellets
+        */
         
         cells.clear();
         for(int i = 0; i < map.height(); i++)
@@ -203,6 +227,11 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 {
                     cells.add( new MapPoint(j, i, Color.LIGHT_GRAY ) );// "■"
                 }
+                
+                if(map.get(i,j) == '$')
+                {
+                    cells.add( new MapPoint(j, i, Color.BLUE ) );// "■"
+                }
             }
       }
       
@@ -221,20 +250,8 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
          super.paintComponent(g);
          
          g.setColor(getBackground());
-         
-        /*
-        for (Point fillCell : fillCells)
-        {
-            
-            int cellX = 10 + (fillCell.x * cellWidth);
-            int cellY = 10 + (fillCell.y * cellHeight);
-            
-            g.setColor(Color.RED);
-            g.fillRect(cellX, cellY, cellWidth, cellHeight);
-        }
-         */
-        
-        for (MapPoint cell : cells)
+
+          for (MapPoint cell : cells)
         {
             int cellX = 10 + (cell.x * cellWidth);
             int cellY = 10 + (cell.y * cellHeight);

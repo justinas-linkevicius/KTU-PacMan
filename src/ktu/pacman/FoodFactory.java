@@ -31,7 +31,7 @@ public class FoodFactory extends MapElementFactory
     }
 
     @Override
-    Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos) {
+    Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState) {
         return null;
     }
 }

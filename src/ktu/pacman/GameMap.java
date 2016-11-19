@@ -32,6 +32,31 @@ public class GameMap
         return this.map[x][y];
     }
     
+    public char get(Point p)
+    {
+        return this.get(p.x, p.y);
+    }
+    
+    public char get(Point p, DirectionEnum d)
+    {
+        switch (d)
+        {
+            case UP:
+                return this.get(p.x-1, p.y);
+      
+            case RIGHT:
+                return this.get(p.x, p.y+1);
+     
+            case BOTTOM:
+                return this.get(p.x+1, p.y);
+       
+            case LEFT:
+                return this.get(p.x, p.y-1);
+        }
+        
+        return ' ';
+    }
+    
     public void set(Point p, char s)
     {
         this.map[ p.x ][ p.y ] = s;

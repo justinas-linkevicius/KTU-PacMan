@@ -11,18 +11,12 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public class Inky implements Enemy
+public class Inky extends Enemy
 {
-    private GameMap map;
-    private Point   pos;
-    private Point   pacmanPos;
-    
-    private BehaviorAlgorithm behavior;
-    
-    public Inky(GameMap map, Point pacmanPos)
+    public Inky(GameMap m, Point p, GameState g)
     {
-        this.map = map;
-        this.pacmanPos = pacmanPos;
+        super(m, p, g);
+        this.gameState.addEnemy(this);
         
         System.out.println("Generated Inky");
     }
@@ -65,5 +59,10 @@ public class Inky implements Enemy
             System.out.println("Inky not found in map string");
         else
             System.out.println("Inky found: " + this.pos.x + "x" + this.pos.y );
+    }
+
+    @Override
+    public void updateState() {
+        System.out.println("Inky: updatingState()");
     }
 }

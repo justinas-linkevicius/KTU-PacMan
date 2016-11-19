@@ -11,18 +11,12 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public class Pinky implements Enemy
+public class Pinky extends Enemy
 {
-    private GameMap map;
-    private Point   pos;
-    private Point   pacmanPos;
-    
-    private BehaviorAlgorithm behavior;
-    
-    public Pinky(GameMap map, Point pacmanPos)
+    public Pinky(GameMap m, Point p, GameState g)
     {
-        this.map = map;
-        this.pacmanPos = pacmanPos;
+        super(m, p, g);
+        this.gameState.addEnemy(this);
         
         System.out.println("Generated Pinky");
     }
@@ -35,8 +29,6 @@ public class Pinky implements Enemy
     public void setPosition(Point p)
     {
         this.pos = p;
-        
-        // update map
     }
     
     public Point getPosition()
@@ -66,5 +58,10 @@ public class Pinky implements Enemy
             System.out.println("Pinky not found in map string");
         else
             System.out.println("Pinky found: " + this.pos.x + "x" + this.pos.y );
+    }
+
+    @Override
+    public void updateState() {
+        System.out.println("Pinky: updatingState()");
     }
 }

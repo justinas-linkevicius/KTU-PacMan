@@ -11,20 +11,12 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public class Binky implements Enemy
+public class Binky extends Enemy
 {
-    private GameMap map;
-    private Point   pos;
-    private Point   pacmanPos;
-    private Direction previousDirection;
-    
-    private BehaviorAlgorithm behavior;
-    
-    public Binky(GameMap map, Point pacmanPos)
+    public Binky(GameMap m, Point p, GameState g)
     {
-        this.map = map;
-        this.pacmanPos = pacmanPos;
-        this.findPosition();
+        super(m, p, g);
+        this.gameState.addEnemy(this);
         
         System.out.println("Generated Binky");
     }
@@ -48,11 +40,21 @@ public class Binky implements Enemy
     
     public void update()
     {
-        DirectionEnum direction = this.behavior.move(map, pos, pos);
+        DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
         
         // update map
-        this.map.set(pos, ' ');
+        if(previousChar == '\0')
+            this.map.set(pos, ' ');
+        else
+            this.map.set(pos, previousChar);
+        
+        // new position after move
         this.pos = Direction.directionToPoint(pos, direction);
+        
+        // remember old symbol
+        previousChar = this.map.get(pos);
+        
+        // set new position
         this.map.set(pos, 'b');
     }
 
@@ -73,5 +75,15 @@ public class Binky implements Enemy
             System.out.println("Binky not found in map string");
         else
             System.out.println("Binky found: " + this.pos.x + "x" + this.pos.y );
+    }
+
+    @Override
+    public void updateState() {
+        System.out.println("Binky: updating state");
+        
+        if(gameState.getEnemyState() == 2)
+        {
+            this.behavior = new RandomBehavior2();
+        }
     }
 }

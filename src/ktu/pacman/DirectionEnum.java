@@ -5,14 +5,11 @@
  */
 package ktu.pacman;
 
-import java.awt.Point;
-
 /**
  *
  * @author Justinas
  */
-public abstract class MapElementFactory
-{
-    abstract Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState);
-    abstract Food getFood(String foodType, GameMap map);
+
+public enum DirectionEnum {
+        NONE, UP, UPRIGHT, RIGHT, BOTTOMRIGHT, BOTTOM, BOTTOMLEFT, LEFT, TOPLEFT
 }

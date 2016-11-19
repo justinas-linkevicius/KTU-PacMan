@@ -11,21 +11,15 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public class Clyde implements Enemy
+public class Clyde extends Enemy
 {
-    private GameMap map;
-    private Point   pos;
-    private Point   pacmanPos;
-    
-    private BehaviorAlgorithm behavior;
-    
-    public Clyde(GameMap map, Point pacmanPos)
+
+    public Clyde(GameMap m, Point p, GameState g)
     {
-        this.map = map;
-        this.pacmanPos = pacmanPos;
+        super(m, p, g);
+        this.gameState.addEnemy(this);
         
         System.out.println("Generated Clyde");
-        this.findPosition();
     }
     
     public void setBehavior( BehaviorAlgorithm b )
@@ -47,12 +41,22 @@ public class Clyde implements Enemy
     
     public void update()
     {
-        DirectionEnum direction = this.behavior.move(map, pos, pos);
+        DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
         
         // update map
-        this.map.set(pos, ' ');
+        if(previousChar == '\0')
+            this.map.set(pos, ' ');
+        else
+            this.map.set(pos, previousChar);
+        
+        // new position after move
         this.pos = Direction.directionToPoint(pos, direction);
-        this.map.set(pos, 'c');
+        
+        // remember old symbol
+        previousChar = this.map.get(pos);
+        
+        // set new position
+        this.map.set(pos, 'b');
     }
 
     @Override
@@ -72,5 +76,15 @@ public class Clyde implements Enemy
             System.out.println("Clyde not found in map string");
         else
             System.out.println("Clyde found: " + this.pos.x + "x" + this.pos.y );
+    }
+
+    @Override
+    public void updateState() {
+        System.out.println("Clyde: updating state");
+        
+        if(gameState.getEnemyState() == 2)
+        {
+            this.behavior = new RandomBehavior();
+        }
     }
 }

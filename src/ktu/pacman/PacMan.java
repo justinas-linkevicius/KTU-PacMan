@@ -15,11 +15,14 @@ import java.awt.Point;
 public class PacMan
 {
     public Point position;
-    public GameMap map;
-    public DirectionEnum direction;
+    private GameMap map;
+    private GameState gameState;
+    private DirectionEnum direction;
+    private String collisionElements = ".$bpic";
     
-    public PacMan(GameMap map)
+    public PacMan(GameMap map, GameState gameState)
     {
+        this.gameState = gameState;
         this.map = map;
         this.findPacman();
         this.setDirection( DirectionEnum.NONE );
@@ -46,7 +49,7 @@ public class PacMan
             System.out.println("pacman not found in map string");
         else
             System.out.println("pacman found: " + this.position.x + "x" + this.position.y );
-    }
+    } 
     
     public int x()
     {
@@ -68,39 +71,99 @@ public class PacMan
         this.position.y = y;
     }
     
+    // check for walls & enemies
+    public boolean canMove( DirectionEnum d )
+    {
+        String cantMove = "1bpic";
+        
+        for(int i = 0; i < cantMove.length(); i++)
+            if( this.map.get(position, d) == cantMove.charAt(i) )
+                return false;
+        
+        return true;
+    }
+
+    public boolean isColision()
+    {
+        for(int i = 0; i < collisionElements.length(); i++)
+            if( this.map.get(position, direction) == collisionElements.charAt(i) )
+                return true;
+        
+        return false;
+    }
+    
+    public char findCollisionElement()
+    {
+        for(int i = 0; i < collisionElements.length(); i++)
+            if( this.map.get(position, direction) == collisionElements.charAt(i) )
+                return this.map.get(position, direction);
+        
+        return ' ';
+    }
+    
+    public void onCollision()
+    {
+        if( this.isColision() )
+        {
+            char collisionWith = this.findCollisionElement();
+            
+            switch(collisionWith)
+            {
+                // collision with food: .$
+                case '.':
+                    System.out.println("Got food .");
+                break;
+                    
+                case '$':
+                    System.out.println("Got food $");
+                    gameState.setEnemyState(2);
+                break;
+                    
+                // collision with enemies: bpic
+                case 'b':
+                    System.out.println("Game over");
+                break; 
+                    
+                case 'p':
+                    System.out.println("Game over");
+                break; 
+                    
+                case 'i':
+                    System.out.println("Game over");
+                break;
+                    
+                case 'c':
+                    System.out.println("Game over");
+                break;
+            }
+        }
+    }
+    
     public void up()
     {
         this.map.set(position, ' ');
-        
-        if( this.map.get(position.x-1, position.y) != '1' ) 
-            this.position.x--;
-        
-        this.map.set(position, '*');
+        this.position.x--;
+        this.map.set(position, '*');           
     }
     
     public void down()
     {
         this.map.set(position, ' ');
-        
-        if( this.map.get(position.x+1, position.y) != '1' ) 
-            this.position.x++;
-        
+        this.position.x++;
         this.map.set(position, '*');
     }
     
     public void left()
     {
         this.map.set(position, ' ');
-        if( this.map.get(position.x, position.y-1) != '1' ) 
-            this.position.y--;
+        this.position.y--;
         this.map.set(position, '*');
     }
     
     public void right()
     {
         this.map.set(position, ' ');
-        if( this.map.get(position.x, position.y+1) != '1' ) 
-            this.position.y++;
+        this.position.y++;
         this.map.set(position, '*');
     }
     
@@ -111,22 +174,28 @@ public class PacMan
     
     public void update()
     {
+        this.onCollision();
+        
         switch (direction)
         {
             case UP:
-                this.up();
+                if(this.canMove(DirectionEnum.UP) )
+                    this.up();
             break;
                     
             case RIGHT:
-                this.right();
+                if(this.canMove(DirectionEnum.RIGHT) )
+                    this.right();
             break;
                 
             case BOTTOM:
-                this.down();
+                if(this.canMove(DirectionEnum.BOTTOM) )
+                    this.down();
             break;
                 
             case LEFT:
-                this.left();
+                if(this.canMove(DirectionEnum.LEFT) )
+                    this.left();
             break; 
         }
     }

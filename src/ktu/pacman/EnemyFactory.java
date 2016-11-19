@@ -14,7 +14,7 @@ import java.awt.Point;
 public class EnemyFactory extends MapElementFactory
 {
     @Override
-    public Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos)
+    public Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState)
     {
          if(enemyType == null){
             return null;
@@ -22,19 +22,19 @@ public class EnemyFactory extends MapElementFactory
 
          if(enemyType.equalsIgnoreCase("Binky"))
          {
-            return new Binky(map, pacmanPos);
+            return new Binky(map, pacmanPos, gameState);
 
          } else if(enemyType.equalsIgnoreCase("Clyde"))
          {
-            return new Clyde(map, pacmanPos);
+            return new Clyde(map, pacmanPos, gameState);
 
          } else if(enemyType.equalsIgnoreCase("Inky"))
          {
-            return new Inky(map, pacmanPos);
+            return new Inky(map, pacmanPos, gameState);
             
          } else if(enemyType.equalsIgnoreCase("Pinky"))
          {
-            return new Pinky(map, pacmanPos);
+            return new Pinky(map, pacmanPos, gameState);
          }
 
          return null;
