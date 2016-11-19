@@ -12,8 +12,12 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import ktu.pacman.command.*;
 
@@ -38,6 +42,8 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       private Enemy clyde;
       private Enemy inky;
       private Enemy pinky;
+      
+      // private BufferedImage image;
       
       public GameMapPanel()
       {
@@ -250,8 +256,8 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
          super.paintComponent(g);
          
          g.setColor(getBackground());
-
-          for (MapPoint cell : cells)
+         
+        for (MapPoint cell : cells)
         {
             int cellX = 10 + (cell.x * cellWidth);
             int cellY = 10 + (cell.y * cellHeight);
@@ -266,10 +272,43 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 continue;
             }
             
-            g.fillRect(cellX, cellY, cellWidth, cellHeight);
+            // if painting pacman
+            if(cell.color == Color.YELLOW)
+            {
+                IMapImage pacmanImage;
+                
+                switch(pacman.getDirection())
+                {
+                    case UP:
+                        pacmanImage = MapImageFactory.getImage("pacmanImage", "./img/pacman/u.png");
+                    break;
+                        
+                    case RIGHT:
+                        pacmanImage = MapImageFactory.getImage("pacmanImage", "./img/pacman/r.png");
+                    break;
+                        
+                    case LEFT:
+                        pacmanImage = MapImageFactory.getImage("pacmanImage", "./img/pacman/l.png");
+                    break;
+                        
+                    case BOTTOM:
+                        pacmanImage = MapImageFactory.getImage("pacmanImage", "./img/pacman/d.png");
+                    break;
+                        
+                    default:
+                        pacmanImage = MapImageFactory.getImage("pacmanImage", "./img/pacman/r.png");
+                    break;
+                }
+                
+                pacmanImage.draw(g, cellX, cellY, this);
+                
+            } else
+            {
+                g.fillRect(cellX, cellY, cellWidth, cellHeight);
+            }
         }
-        
-        g.setColor(Color.RED);
+
+        //g.setColor(Color.RED);
        
         /*
         * @param         x   the <i>x</i> coordinate

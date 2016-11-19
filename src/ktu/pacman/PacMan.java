@@ -28,6 +28,11 @@ public class PacMan
         this.setDirection( DirectionEnum.NONE );
     }
     
+    public DirectionEnum getDirection()
+    {
+        return this.direction;
+    }
+    
     public void setDirection( DirectionEnum d )
     {
         this.direction = d;
