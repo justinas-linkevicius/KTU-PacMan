@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import ktu.pacman.behaviors.bfs.BFSBehavior;
 import ktu.pacman.command.*;
 
 /**
@@ -109,7 +110,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position, gameState);
         
         // strategy - assign algorithm for each enemy
-        this.binky.setBehavior( new RandomBehavior() );
+        this.binky.setBehavior( new BFSBehavior() );
         this.clyde.setBehavior( new RandomBehavior2() );
         
         // get food factory

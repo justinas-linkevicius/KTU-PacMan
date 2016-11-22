@@ -12,23 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/GameMap.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/FoodFactory.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/Food.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/Binky.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/BehaviorAlgorithm.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/Direction.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/AbstractLogger.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/Enemy.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/MapElementFactory.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/MapPoint.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/GameMapPanel.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/GameFrame.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/Game.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/LogFactory.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/EnemyFactory.java</file>
-            <file>file:/C:/Users/ltdan/OneDrive/Documents/GitHub/KTU-PacMan/src/ktu/pacman/Dot.java</file>
+            <file>file:/C:/Users/Justinas/Documents/NetBeansProjects/KTU-PacMan/src/ktu/pacman/Game.java</file>
         </group>
     </open-files>
 </project-private>

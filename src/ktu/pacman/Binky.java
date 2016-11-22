@@ -40,6 +40,8 @@ public class Binky extends Enemy
     
     public void update()
     {
+        this.findPosition();
+        
         DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
         
         // update map
@@ -70,11 +72,13 @@ public class Binky extends Enemy
                     this.pos = new Point(i,j);
                     found = true;
                 }
-                 
+          
+        /*
         if(!found)
             System.out.println("Binky not found in map string");
         else
             System.out.println("Binky found: " + this.pos.x + "x" + this.pos.y );
+        */
     }
 
     @Override

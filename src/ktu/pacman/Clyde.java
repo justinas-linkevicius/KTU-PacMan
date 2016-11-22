@@ -56,7 +56,7 @@ public class Clyde extends Enemy
         previousChar = this.map.get(pos);
         
         // set new position
-        this.map.set(pos, 'b');
+        this.map.set(pos, 'c');
     }
 
     @Override
