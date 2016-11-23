@@ -13,6 +13,8 @@ import java.awt.Point;
  */
 public class Binky extends Enemy
 {
+    private String collisionElements = "1pic";
+    
     public Binky(GameMap m, Point p, GameState g)
     {
         super(m, p, g);
@@ -44,6 +46,24 @@ public class Binky extends Enemy
         
         DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
         
+        // slow down
+        int randomNum = 1 + (int)(Math.random() * 10); 
+        if(randomNum < 4)
+        {
+            direction = DirectionEnum.NONE;
+        }
+        
+        // check for collision
+        boolean isCollision = false;
+        for(int i = 0; i < collisionElements.length(); i++)
+            if( this.map.get(pos, direction) == collisionElements.charAt(i) )
+                isCollision = true;
+        
+        if(isCollision)
+        {
+            direction = DirectionEnum.NONE;
+        }
+        
         // update map
         if(previousChar == '\0')
             this.map.set(pos, ' ');
@@ -55,6 +75,8 @@ public class Binky extends Enemy
         
         // remember old symbol
         previousChar = this.map.get(pos);
+        if(previousChar == '*')
+            previousChar = '\0';
         
         // set new position
         this.map.set(pos, 'b');

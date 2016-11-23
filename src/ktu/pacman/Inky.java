@@ -40,7 +40,26 @@ public class Inky extends Enemy
     
     public void update()
     {
-        this.behavior.move(map, pos, pos);
+        this.findPosition();
+        
+        DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
+        
+        // update map
+        if(previousChar == '\0')
+            this.map.set(pos, ' ');
+        else
+            this.map.set(pos, previousChar);
+        
+        // new position after move
+        this.pos = Direction.directionToPoint(pos, direction);
+        
+        // remember old symbol
+        previousChar = this.map.get(pos);
+        if(previousChar == '*')
+            previousChar = '\0';
+        
+        // set new position
+        this.map.set(pos, 'i');
     }
 
     public void findPosition()

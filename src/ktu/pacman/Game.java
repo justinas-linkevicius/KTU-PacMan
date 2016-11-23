@@ -24,7 +24,7 @@ public class Game {
         
         ILogger fl = logFactory.getLogger("fileLogger");
         
-        fl.log("testFile");
+        //fl.log("testFile");
         
         ConsoleLogger.getInstance().log("game starting");
         

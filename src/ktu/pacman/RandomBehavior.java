@@ -15,9 +15,43 @@ public class RandomBehavior implements BehaviorAlgorithm
 {
     public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
     {
-        if( currentPos.x < map.height()-2 && map.get(currentPos, DirectionEnum.BOTTOM) != '1')
-            return DirectionEnum.BOTTOM;
+        
+        int randomDirectionNum; 
+        DirectionEnum randomDirection = DirectionEnum.NONE;
+        
+        boolean freeDirectionFound = false;
+        
+        while(freeDirectionFound == false)
+        {
+             randomDirectionNum = 1 + (int) (Math.random() * 4);
+             
+             switch(randomDirectionNum)
+             {
+                case 1:
+                    randomDirection = DirectionEnum.BOTTOM;
+                break;
 
-        return DirectionEnum.UP;
+                case 2:
+                    randomDirection = DirectionEnum.UP;
+                break;
+
+                case 3:
+                    randomDirection = DirectionEnum.LEFT;
+                break;
+
+                case 4:
+                    randomDirection = DirectionEnum.RIGHT;
+                break;
+
+                default:
+                    randomDirection = DirectionEnum.NONE;
+                break;
+             }
+        
+            if( map.get(currentPos, randomDirection) != '1' )
+                freeDirectionFound = true;
+        }
+        
+        return randomDirection;
     }
 }

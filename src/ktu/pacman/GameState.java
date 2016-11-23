@@ -38,7 +38,6 @@ public class GameState {
         System.out.println("updating");
         for(Enemy o: enemies)
         {
-            
             o.updateState();
         }
     }

@@ -111,7 +111,9 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         
         // strategy - assign algorithm for each enemy
         this.binky.setBehavior( new BFSBehavior() );
-        this.clyde.setBehavior( new RandomBehavior2() );
+        this.clyde.setBehavior( new RandomBehavior() );
+        this.inky.setBehavior(  new RandomBehavior2() );
+        this.pinky.setBehavior( new RandomBehavior2() );
         
         // get food factory
         MapElementFactory foodFactory = MapElementFactoryProducer.getFactory("Food");
@@ -141,31 +143,21 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 
                 case KeyEvent.VK_UP:
                     // handle up 
-                    //pacman.setDirection( DirectionEnum.UP );
-                    
                     pacmanControl.moveUp(pacman);
                 break;
                 case KeyEvent.VK_DOWN:
                     // handle down 
-                    //pacman.setDirection( DirectionEnum.BOTTOM );
-                    
                     pacmanControl.moveDown(pacman);
                 break;
                 case KeyEvent.VK_LEFT:
                     // handle left
-                    //pacman.setDirection( DirectionEnum.LEFT );
-                    
                     pacmanControl.moveLeft(pacman);
                 break;
                 case KeyEvent.VK_RIGHT:
                     // handle right
-                    //pacman.setDirection( DirectionEnum.RIGHT );
-                    
                     pacmanControl.moveRight(pacman);
                 break;
              }
-
-            //System.out.println("keyPressed();");
             
         } else if (e.getID() == KeyEvent.KEY_RELEASED) {
             
@@ -181,8 +173,8 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         
         this.binky.update();
         this.clyde.update();
-        //this.binky.update();
-        //this.binky.update();
+        //this.inky.update();
+        //this.pinky.update();
         
         this.pacman.update();
         
@@ -274,6 +266,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
             }
             
             // if painting pacman
+            // FlyWeight
             if(cell.color == Color.YELLOW)
             {
                 IMapImage pacmanImage;
