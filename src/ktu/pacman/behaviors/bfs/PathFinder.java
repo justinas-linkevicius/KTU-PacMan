@@ -148,26 +148,34 @@ public class PathFinder
     
     public DirectionEnum getFirstMove()
     {
+        char charTop    = grid[starty-1][startx].getContents();
+        char charBottom = grid[starty+1][startx].getContents();
+        char charLeft   = grid[starty][startx-1].getContents();
+        char charRight  = grid[starty][startx+1].getContents();
+        
+        String toFind = "#*";
+        
+        // find path or pacman
         // top
-        if( grid[starty-1][startx].getContents() == '#' )
+        if( toFind.indexOf(charTop) != -1 )
         {
             return DirectionEnum.UP;
         }
         
         // bottom
-        if( grid[starty+1][startx].getContents() == '#' )
+        if( toFind.indexOf(charBottom) != -1 )
         {
             return DirectionEnum.BOTTOM;
         }
         
         // left
-        if( grid[starty][startx-1].getContents() == '#' )
+        if( toFind.indexOf(charLeft) != -1 )
         {
             return DirectionEnum.LEFT;
         }
         
         // right
-        if( grid[starty][startx+1].getContents() == '#' )
+        if( toFind.indexOf(charRight) != -1 )
         {
             return DirectionEnum.RIGHT;
         }

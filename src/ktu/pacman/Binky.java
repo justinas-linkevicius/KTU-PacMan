@@ -6,18 +6,17 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
  * @author Justinas
  */
 public class Binky extends Enemy
-{
-    private String collisionElements = "1pic";
-    
-    public Binky(GameMap m, Point p, GameState g)
+{    
+    public Binky(GameMap m, Point p, GameState g, CollisionHandler c)
     {
-        super(m, p, g);
+        super(m, p, g, c);
         this.gameState.addEnemy(this);
         
         System.out.println("Generated Binky");
@@ -30,56 +29,46 @@ public class Binky extends Enemy
     
     public Point getPosition()
     {
-        return this.pos;
+        return this.position;
     }
     
     public void setPosition(Point p)
     {
-        this.pos = p;
+        this.position = p;
         
         // update map
     }
     
     public void update()
     {
-        this.findPosition();
+        // get the new direction
+        direction = this.behavior.move(map, position, pacmanPos);
         
-        DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
-        
-        // slow down
+        // random slow down
         int randomNum = 1 + (int)(Math.random() * 10); 
         if(randomNum < 4)
-        {
             direction = DirectionEnum.NONE;
-        }
         
         // check for collision
-        boolean isCollision = false;
-        for(int i = 0; i < collisionElements.length(); i++)
-            if( this.map.get(pos, direction) == collisionElements.charAt(i) )
-                isCollision = true;
+        this.collisionHandler.handle(this);
         
-        if(isCollision)
-        {
-            direction = DirectionEnum.NONE;
-        }
-        
-        // update map
+        // 
         if(previousChar == '\0')
-            this.map.set(pos, ' ');
+            this.map.set(position, ' ');
         else
-            this.map.set(pos, previousChar);
+            this.map.set(position, previousChar);
         
         // new position after move
-        this.pos = Direction.directionToPoint(pos, direction);
+        this.position = Direction.directionToPoint(position, direction);
         
         // remember old symbol
-        previousChar = this.map.get(pos);
+        previousChar = this.map.get(position);
         if(previousChar == '*')
             previousChar = '\0';
         
         // set new position
-        this.map.set(pos, 'b');
+        this.map.set(position, 'b');
+        
     }
 
     @Override
@@ -91,16 +80,16 @@ public class Binky extends Enemy
             for(int j = 0; j < map.map[0].length; j++)
                 if(map.map[i][j] == 'b')
                 {
-                    this.pos = new Point(i,j);
+                    this.position = new Point(i,j);
                     found = true;
                 }
           
-        /*
+        
         if(!found)
             System.out.println("Binky not found in map string");
         else
-            System.out.println("Binky found: " + this.pos.x + "x" + this.pos.y );
-        */
+            System.out.println("Binky found: " + this.position.x + "x" + this.position.y );
+        
     }
 
     @Override

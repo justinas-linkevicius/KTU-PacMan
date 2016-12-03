@@ -6,18 +6,24 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
  * @author Justinas
  */
-abstract class Enemy
+public abstract class Enemy
 {
     protected GameMap map;
-    protected Point   pos;
+    
+    // current enemy position & last direction
+    protected Point   position;
+    protected DirectionEnum direction = DirectionEnum.NONE;
+    
     protected Point   pacmanPos;
-    protected DirectionEnum previousDirection = DirectionEnum.NONE;
+    
     protected char previousChar = '\0';
+    protected CollisionHandler collisionHandler;
     
     // strategy
     protected BehaviorAlgorithm behavior;
@@ -25,12 +31,14 @@ abstract class Enemy
     // observer
     protected GameState gameState;
     public abstract void updateState();
-    
-    public Enemy(GameMap m, Point p, GameState g)
+
+        
+    public Enemy(GameMap m, Point p, GameState g, CollisionHandler c)
     {
         this.gameState = g;
         this.map       = m;
         this.pacmanPos = p;
+        this.collisionHandler = c;
         
         this.findPosition();       
     }
@@ -40,4 +48,10 @@ abstract class Enemy
     public abstract void setPosition(Point p);
     public abstract void setBehavior( BehaviorAlgorithm b );
     public abstract void update();
+    
+    // what element of the map pacman will see after moving 1 step in current direction
+    public char nextElement()
+    {
+        return this.map.get(position, direction);
+    }
 }

@@ -6,6 +6,7 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
@@ -31,7 +32,7 @@ public class FoodFactory extends MapElementFactory
     }
 
     @Override
-    Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState) {
+    Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState, CollisionHandler collisionHandler) {
         return null;
     }
 }

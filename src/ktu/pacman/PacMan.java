@@ -7,6 +7,7 @@ package ktu.pacman;
 
 import java.awt.Color;
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
@@ -16,14 +17,17 @@ public class PacMan
 {
     public Point position;
     private GameMap map;
-    private GameState gameState;
+    public GameState gameState;
     private DirectionEnum direction;
-    private String collisionElements = ".$bpic";
     
-    public PacMan(GameMap map, GameState gameState)
+    private CollisionHandler collisionHandler;
+    
+    public PacMan(GameMap map, GameState gameState, CollisionHandler collisionHandler)
     {
         this.gameState = gameState;
         this.map = map;
+        this.collisionHandler = collisionHandler;
+        
         this.findPacman();
         this.setDirection( DirectionEnum.NONE );
     }
@@ -88,60 +92,10 @@ public class PacMan
         return true;
     }
 
-    public boolean isColision()
+    // what element of the map pacman will see after moving 1 step in current direction
+    public char nextElement()
     {
-        for(int i = 0; i < collisionElements.length(); i++)
-            if( this.map.get(position, direction) == collisionElements.charAt(i) )
-                return true;
-        
-        return false;
-    }
-    
-    public char findCollisionElement()
-    {
-        for(int i = 0; i < collisionElements.length(); i++)
-            if( this.map.get(position, direction) == collisionElements.charAt(i) )
-                return this.map.get(position, direction);
-        
-        return ' ';
-    }
-    
-    public void onCollision()
-    {
-        if( this.isColision() )
-        {
-            char collisionWith = this.findCollisionElement();
-            
-            switch(collisionWith)
-            {
-                // collision with food: .$
-                case '.':
-                    System.out.println("Got food .");
-                break;
-                    
-                case '$':
-                    System.out.println("Got food $");
-                    gameState.setEnemyState(2);
-                break;
-                    
-                // collision with enemies: bpic
-                case 'b':
-                    System.out.println("Game over");
-                break; 
-                    
-                case 'p':
-                    System.out.println("Game over");
-                break; 
-                    
-                case 'i':
-                    System.out.println("Game over");
-                break;
-                    
-                case 'c':
-                    System.out.println("Game over");
-                break;
-            }
-        }
+        return this.map.get(position, direction);
     }
     
     public void up()
@@ -179,7 +133,8 @@ public class PacMan
     
     public void update()
     {
-        this.onCollision();
+        //this.onCollision();
+        this.collisionHandler.handle(this);
         
         switch (direction)
         {

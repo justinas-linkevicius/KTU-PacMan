@@ -6,6 +6,7 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
@@ -13,9 +14,9 @@ import java.awt.Point;
  */
 public class Inky extends Enemy
 {
-    public Inky(GameMap m, Point p, GameState g)
+    public Inky(GameMap m, Point p, GameState g,  CollisionHandler c)
     {
-        super(m, p, g);
+        super(m, p, g, c);
         this.gameState.addEnemy(this);
         
         System.out.println("Generated Inky");
@@ -28,38 +29,38 @@ public class Inky extends Enemy
     
     public void setPosition(Point p)
     {
-        this.pos = p;
+        this.position = p;
         
         // update map
     }
     
     public Point getPosition()
     {
-        return this.pos;
+        return this.position;
     }
     
     public void update()
     {
         this.findPosition();
         
-        DirectionEnum direction = this.behavior.move(map, pos, pacmanPos);
+        DirectionEnum direction = this.behavior.move(map, position, pacmanPos);
         
         // update map
         if(previousChar == '\0')
-            this.map.set(pos, ' ');
+            this.map.set(position, ' ');
         else
-            this.map.set(pos, previousChar);
+            this.map.set(position, previousChar);
         
         // new position after move
-        this.pos = Direction.directionToPoint(pos, direction);
+        this.position = Direction.directionToPoint(position, direction);
         
         // remember old symbol
-        previousChar = this.map.get(pos);
+        previousChar = this.map.get(position);
         if(previousChar == '*')
             previousChar = '\0';
         
         // set new position
-        this.map.set(pos, 'i');
+        this.map.set(position, 'i');
     }
 
     public void findPosition()
@@ -70,14 +71,14 @@ public class Inky extends Enemy
             for(int j = 0; j < map.map[0].length; j++)
                 if(map.map[i][j] == 'i')
                 {
-                    this.pos = new Point(i,j);
+                    this.position = new Point(i,j);
                     found = true;
                 }
                  
         if(!found)
             System.out.println("Inky not found in map string");
         else
-            System.out.println("Inky found: " + this.pos.x + "x" + this.pos.y );
+            System.out.println("Inky found: " + this.position.x + "x" + this.position.y );
     }
 
     @Override

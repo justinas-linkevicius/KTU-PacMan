@@ -20,6 +20,8 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import ktu.pacman.behaviors.bfs.BFSBehavior;
+
+import ktu.pacman.collisionHandler.*;
 import ktu.pacman.command.*;
 
 /**
@@ -94,20 +96,30 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.cells = new ArrayList<MapPoint>();
         System.out.println("map size: " +  map.width() + "x" +  map.height() );
         
+        // ChainOfResponsibility
+        CollisionHandler collisionHandler;
+        
+        CollisionHandler pacmanCollision = new PacManCollision();
+        CollisionHandler enemyCollision = new EnemyCollision();
+                
+        // build the chain
+        collisionHandler = pacmanCollision;
+        collisionHandler.setNext(enemyCollision);
+        
         // observer
         GameState gameState = new GameState();
         
-        this.pacman = new PacMan(map, gameState);
+        this.pacman = new PacMan(map, gameState, collisionHandler);
   
         // abstract factory
         // get enemy factory
         MapElementFactory enemyFactory = MapElementFactoryProducer.getFactory("Enemy");
         
         // create enemies
-        this.binky = enemyFactory.getEnemy("binky", map, pacman.position, gameState);
-        this.clyde = enemyFactory.getEnemy("clyde", map, pacman.position, gameState);
-        this.inky  = enemyFactory.getEnemy("inky",  map, pacman.position, gameState);
-        this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position, gameState);
+        this.binky = enemyFactory.getEnemy("binky", map, pacman.position, gameState, collisionHandler);
+        this.clyde = enemyFactory.getEnemy("clyde", map, pacman.position, gameState, collisionHandler);
+        this.inky  = enemyFactory.getEnemy("inky",  map, pacman.position, gameState, collisionHandler);
+        this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position, gameState, collisionHandler);
         
         // strategy - assign algorithm for each enemy
         this.binky.setBehavior( new BFSBehavior() );

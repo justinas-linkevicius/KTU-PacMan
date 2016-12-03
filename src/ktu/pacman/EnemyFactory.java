@@ -6,6 +6,7 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.awt.Point;
 public class EnemyFactory extends MapElementFactory
 {
     @Override
-    public Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState)
+    public Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState, CollisionHandler collisionHandler)
     {
          if(enemyType == null){
             return null;
@@ -22,19 +23,19 @@ public class EnemyFactory extends MapElementFactory
 
          if(enemyType.equalsIgnoreCase("Binky"))
          {
-            return new Binky(map, pacmanPos, gameState);
+            return new Binky(map, pacmanPos, gameState, collisionHandler);
 
          } else if(enemyType.equalsIgnoreCase("Clyde"))
          {
-            return new Clyde(map, pacmanPos, gameState);
+            return new Clyde(map, pacmanPos, gameState, collisionHandler);
 
          } else if(enemyType.equalsIgnoreCase("Inky"))
          {
-            return new Inky(map, pacmanPos, gameState);
+            return new Inky(map, pacmanPos, gameState, collisionHandler);
             
          } else if(enemyType.equalsIgnoreCase("Pinky"))
          {
-            return new Pinky(map, pacmanPos, gameState);
+            return new Pinky(map, pacmanPos, gameState, collisionHandler);
          }
 
          return null;

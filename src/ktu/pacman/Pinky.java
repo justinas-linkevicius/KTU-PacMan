@@ -6,6 +6,7 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
@@ -13,9 +14,9 @@ import java.awt.Point;
  */
 public class Pinky extends Enemy
 {
-    public Pinky(GameMap m, Point p, GameState g)
+    public Pinky(GameMap m, Point p, GameState g, CollisionHandler c)
     {
-        super(m, p, g);
+        super(m, p, g, c);
         this.gameState.addEnemy(this);
         
         System.out.println("Generated Pinky");
@@ -28,17 +29,17 @@ public class Pinky extends Enemy
     
     public void setPosition(Point p)
     {
-        this.pos = p;
+        this.position = p;
     }
     
     public Point getPosition()
     {
-        return this.pos;
+        return this.position;
     }
     
     public void update()
     {
-        this.behavior.move(map, pos, pos);
+        this.behavior.move(map, position, position);
     }
 
     @Override
@@ -50,14 +51,14 @@ public class Pinky extends Enemy
             for(int j = 0; j < map.map[0].length; j++)
                 if(map.map[i][j] == 'i')
                 {
-                    this.pos = new Point(i,j);
+                    this.position = new Point(i,j);
                     found = true;
                 }
                  
         if(!found)
             System.out.println("Pinky not found in map string");
         else
-            System.out.println("Pinky found: " + this.pos.x + "x" + this.pos.y );
+            System.out.println("Pinky found: " + this.position.x + "x" + this.position.y );
     }
 
     @Override

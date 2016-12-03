@@ -6,6 +6,7 @@
 package ktu.pacman;
 
 import java.awt.Point;
+import ktu.pacman.collisionHandler.*;
 
 /**
  *
@@ -13,6 +14,7 @@ import java.awt.Point;
  */
 public abstract class MapElementFactory
 {
-    abstract Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState);
+    abstract Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos,
+            GameState gameState, CollisionHandler collisionHandler);
     abstract Food getFood(String foodType, GameMap map);
 }
