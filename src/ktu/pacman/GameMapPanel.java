@@ -122,9 +122,9 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.pinky = enemyFactory.getEnemy("pinky", map, pacman.position, gameState, collisionHandler);
         
         // strategy - assign algorithm for each enemy
-        this.binky.setBehavior( new BFSBehavior() );
-        this.clyde.setBehavior( new RandomBehavior() );
-        this.inky.setBehavior(  new RandomBehavior2() );
+        this.binky.setBehavior( new SlowBFSBehavior() );
+        this.clyde.setBehavior( new BFSBehavior() );
+        this.inky.setBehavior(  new RandomBehavior() );
         this.pinky.setBehavior( new RandomBehavior2() );
         
         // get food factory

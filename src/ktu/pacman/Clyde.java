@@ -42,22 +42,35 @@ public class Clyde extends Enemy
     
     public void update()
     {
-        DirectionEnum direction = this.behavior.move(map, position, pacmanPos);
+        // get the new direction
+        direction = this.behavior.move(map, position, pacmanPos);
+           
+        // check for collision
+        this.collisionHandler.handle(this);
         
-        // update map
-        if(previousChar == '\0')
-            this.map.set(position, ' ');
-        else
-            this.map.set(position, previousChar);
-        
-        // new position after move
-        this.position = Direction.directionToPoint(position, direction);
-        
-        // remember old symbol
-        previousChar = this.map.get(position);
-        
-        // set new position
-        this.map.set(position, 'c');
+        if(!isFrozen())
+        {
+            if(previousChar == '\0')
+                this.map.set(position, ' ');
+            else
+                this.map.set(position, previousChar);
+
+            // new position after move
+            this.position = Direction.directionToPoint(position, direction);
+
+            // remember old symbol
+            previousChar = this.map.get(position);
+            if(previousChar == '*')
+                previousChar = '\0';
+
+            // set new position
+            this.map.set(position, 'c');            
+        }
+
+        if(isFrozen())
+        {
+            unfreeze();
+        }
     }
 
     @Override

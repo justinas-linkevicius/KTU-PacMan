@@ -41,8 +41,6 @@ public class EnemyCollision extends CollisionHandler
     {
         if( this.isColision() )
         {
-            System.out.println("COLLISION!");
-            
             char collisionWith = this.findCollisionElement();
             
             switch(collisionWith)
@@ -59,6 +57,7 @@ public class EnemyCollision extends CollisionHandler
                 // collision with pacman: *
                 case '*':
                     System.out.println("Enemy collision with PacMan: Gave Over");
+                    enemy.freeze();
                 break;
             }
         }
@@ -70,7 +69,6 @@ public class EnemyCollision extends CollisionHandler
         // handle all enemy objects
         if(o.getClass().getSuperclass().getName()  == "ktu.pacman.Enemy")
         {
-            //System.out.println("Handling Enemy: " + o.getClass().getName());
             this.enemy = (Enemy) o;
             this.handleCollision();
         } else if(this.next != null)

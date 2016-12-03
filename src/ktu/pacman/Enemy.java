@@ -14,6 +14,8 @@ import ktu.pacman.collisionHandler.*;
  */
 public abstract class Enemy
 {
+    protected char enemyId = '\0';
+    
     protected GameMap map;
     
     // current enemy position & last direction
@@ -31,7 +33,9 @@ public abstract class Enemy
     // observer
     protected GameState gameState;
     public abstract void updateState();
-
+    
+    // stop from moving for one cycle
+    protected boolean freeze = false;
         
     public Enemy(GameMap m, Point p, GameState g, CollisionHandler c)
     {
@@ -53,5 +57,19 @@ public abstract class Enemy
     public char nextElement()
     {
         return this.map.get(position, direction);
+    }
+
+    public void freeze() {
+        freeze = true;
+    }
+    
+    public void unfreeze()
+    {
+        freeze = false;
+    }
+    
+    public boolean isFrozen()
+    {
+        return freeze;
     }
 }
