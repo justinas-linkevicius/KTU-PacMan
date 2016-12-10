@@ -18,14 +18,11 @@ public class Sound {
         Settings settings = null;
         settings = settings.getInstance();
         if(settings.soundGet()) {
-            ConsoleLogger.getInstance().log("SOUND ON");
-            //new MP3Player(new File("PacmanSoundEffect.mp3")).play();   
-                //MP3Player player = new MP3Player(new File("Pacman.mp3"));
-                //player.play();
-                //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                //frame.getContentPane().add(player);
-                //frame.pack();
+             AudioPlayer audioPlayer = new AudioPlayer();
+
+            audioPlayer.play("mp3", "Pacman.mp3");
         }
     }
 }
 
+    
