@@ -23,7 +23,7 @@ public class Clyde extends Enemy
         this.gameState.addEnemy(this);
         this.findPosition();
         
-        System.out.println("Generated Binky");
+        System.out.println("Generated Clyde");
     }
     
     public void setBehavior( BehaviorAlgorithm b )
