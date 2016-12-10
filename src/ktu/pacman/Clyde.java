@@ -91,15 +91,15 @@ public class Clyde extends Enemy
           
         
         if(!found)
-            System.out.println("Binky not found in map string");
+            System.out.println("Clyde not found in map string");
         else
-            System.out.println("Binky found: " + this.position.x + "x" + this.position.y );
+            System.out.println("Clyde found: " + this.position.x + "x" + this.position.y );
         
     }
 
     @Override
     public void updateState() {
-        System.out.println("Binky: updating state");
+        System.out.println("Clyde: updating state");
         
         if(gameState.getEnemyState() == 2)
         {
