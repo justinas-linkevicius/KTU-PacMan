@@ -14,7 +14,7 @@ import ktu.pacman.behaviors.bfs.BFSBehavior;
  */
 public class SlowBFSBehavior implements BehaviorAlgorithm
 {
-    public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
+    public DirectionEnum move(IGameMap map, Point currentPos, Point desiredPos)
     {
         BFSBehavior bfs = new BFSBehavior();
         DirectionEnum bfsDirection = bfs.move(map, currentPos, desiredPos);

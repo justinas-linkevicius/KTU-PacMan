@@ -14,7 +14,7 @@ import ktu.pacman.collisionHandler.*;
  */
 public abstract class MapElementFactory
 {
-    abstract Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos,
-            GameState gameState, CollisionHandler collisionHandler);
-    abstract Food getFood(String foodType, GameMap map);
+    abstract Enemy getEnemy(String enemyType, IGameMap map, Point pacmanPos, IGameState gameState, CollisionHandler collisionHandler);
+    abstract Food getFood(String foodType, IGameMap map);
 }
+ 

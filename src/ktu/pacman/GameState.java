@@ -12,7 +12,8 @@ import java.util.List;
  *
  * @author Justinas
  */
-public class GameState {
+public class GameState implements IGameState
+{
     private List<Enemy> enemies = new LinkedList<Enemy>();
     private int enemyState = 1;    
     

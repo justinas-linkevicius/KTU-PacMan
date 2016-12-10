@@ -23,7 +23,7 @@ public class GameFrame extends JFrame implements ActionListener
    private GameMapPanel gamePanel    = new GameMapPanel();
    private JPanel       buttonsPanel = new JPanel();
    
-   private JButton startButton = new JButton("Start");
+   private JButton startButton = new JButton("Start"); 
    private JButton quitButton  = new JButton("Quit");
    private JButton pauseButton = new JButton("Pause");
    

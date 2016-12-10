@@ -15,12 +15,12 @@ import ktu.pacman.collisionHandler.*;
 public class FoodFactory extends MapElementFactory
 {
     @Override
-    Food getFood(String foodType, GameMap map)
+    Food getFood(String foodType, IGameMap map)
     {
          if(foodType == null){
             return null;
          }		
-
+ 
          if(foodType.equalsIgnoreCase("Dot")){
             return new Dot(map);
 
@@ -32,7 +32,7 @@ public class FoodFactory extends MapElementFactory
     }
 
     @Override
-    Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState, CollisionHandler collisionHandler) {
+    Enemy getEnemy(String enemyType, IGameMap map, Point pacmanPos, IGameState gameState, CollisionHandler collisionHandler) {
         return null;
     }
 }

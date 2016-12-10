@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import ktu.pacman.behaviors.bfs.BFSBehavior;
@@ -50,7 +52,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       
       // private BufferedImage image;
       
-      public GameMapPanel() throws CloneNotSupportedException
+      public GameMapPanel()
       {
         this.map = new GameMap(new String[]
         { 
@@ -112,7 +114,7 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         enemyCollision.setNext(nullColision);
         
         // observer
-        GameState gameState = new GameState();
+        IGameState gameState = new GameState();
         
         this.pacman = new PacMan(map, gameState, collisionHandler);
   
@@ -132,8 +134,12 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.inky.setBehavior(  new RandomBehavior() );
         this.pinky.setBehavior( new RandomBehavior2() );
         
-        // prototype
-        this.clone = binky.clone();
+        try {
+            // prototype
+            this.clone = binky.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(GameMapPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.clone.setPosition(1,1);
         
         // get food factory

@@ -13,8 +13,8 @@ import ktu.pacman.collisionHandler.*;
  * @author Justinas
  */
 public class Binky extends Enemy
-{    
-    public Binky(GameMap m, Point p, GameState g, CollisionHandler c)
+{     
+    public Binky(IGameMap m, Point p, IGameState g, CollisionHandler c)
     {
         super(m, p, g, c);
         

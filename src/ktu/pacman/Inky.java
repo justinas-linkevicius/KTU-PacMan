@@ -14,7 +14,7 @@ import ktu.pacman.collisionHandler.*;
  */
 public class Inky extends Enemy
 {
-    public Inky(GameMap m, Point p, GameState g,  CollisionHandler c)
+    public Inky(IGameMap m, Point p, IGameState g,  CollisionHandler c)
     {
         super(m, p, g, c);
         

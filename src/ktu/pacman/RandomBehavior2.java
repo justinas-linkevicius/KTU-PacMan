@@ -14,7 +14,7 @@ import java.awt.Point;
 public class RandomBehavior2 implements BehaviorAlgorithm
 {
     // TODO: add Point previousPos
-    public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
+    public DirectionEnum move(IGameMap map, Point currentPos, Point desiredPos)
     {
         if( map.get(currentPos, DirectionEnum.UP) != '1')
             return DirectionEnum.UP;

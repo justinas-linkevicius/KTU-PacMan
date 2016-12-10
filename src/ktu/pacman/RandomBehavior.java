@@ -13,7 +13,7 @@ import java.awt.Point;
  */
 public class RandomBehavior implements BehaviorAlgorithm
 {
-    public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
+    public DirectionEnum move(IGameMap map, Point currentPos, Point desiredPos)
     {
         
         int randomDirectionNum; 

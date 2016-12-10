@@ -14,7 +14,7 @@ import ktu.pacman.collisionHandler.*;
  */
 public class Clyde extends Enemy
 {
-    public Clyde(GameMap m, Point p, GameState g, CollisionHandler c)
+    public Clyde(IGameMap m, Point p, IGameState g, CollisionHandler c)
     {
         super(m, p, g, c);
         

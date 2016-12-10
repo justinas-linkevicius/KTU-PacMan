@@ -13,10 +13,11 @@ import java.awt.Point;
 import ktu.pacman.BehaviorAlgorithm;
 import ktu.pacman.DirectionEnum;
 import ktu.pacman.GameMap;
+import ktu.pacman.IGameMap;
 
 public class BFSBehavior implements BehaviorAlgorithm
 {
-    public DirectionEnum move(GameMap map, Point currentPos, Point desiredPos)
+    public DirectionEnum move(IGameMap map, Point currentPos, Point desiredPos)
     {
         PathFinder bfsPathFinder = new PathFinder( map.map, currentPos, desiredPos );  
         

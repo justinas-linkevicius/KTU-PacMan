@@ -5,13 +5,17 @@
  */
 package ktu.pacman;
 
-import java.awt.Point;
-
 /**
  *
  * @author Justinas
  */
-public interface BehaviorAlgorithm
+public interface IGameState
 {
-    public DirectionEnum move(IGameMap map, Point currentPos, Point desiredPos);
+    public int getEnemyState();
+    
+    public void setEnemyState( int state );
+    
+    public void addEnemy( Enemy e );
+    
+    public void notifyEnemies();
 }

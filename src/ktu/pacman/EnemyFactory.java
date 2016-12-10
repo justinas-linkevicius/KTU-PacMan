@@ -15,7 +15,7 @@ import ktu.pacman.collisionHandler.*;
 public class EnemyFactory extends MapElementFactory
 {
     @Override
-    public Enemy getEnemy(String enemyType, GameMap map, Point pacmanPos, GameState gameState, CollisionHandler collisionHandler)
+    public Enemy getEnemy(String enemyType, IGameMap map, Point pacmanPos, IGameState gameState, CollisionHandler collisionHandler)
     {
          if(enemyType == null){
             return null;
@@ -41,8 +41,8 @@ public class EnemyFactory extends MapElementFactory
          return null;
     }
 
-    @Override
-    Food getFood(String foodType, GameMap map)
+    @Override 
+    Food getFood(String foodType, IGameMap map)
     {
         return null;
     }

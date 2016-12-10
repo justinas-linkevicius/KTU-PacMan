@@ -16,13 +16,13 @@ import ktu.pacman.collisionHandler.*;
 public class PacMan
 {
     public Point position;
-    private GameMap map;
-    public GameState gameState;
+    private IGameMap map;
+    public IGameState gameState;
     private DirectionEnum direction;
     
     private CollisionHandler collisionHandler;
     
-    public PacMan(GameMap map, GameState gameState, CollisionHandler collisionHandler)
+    public PacMan(IGameMap map, IGameState gameState, CollisionHandler collisionHandler)
     {
         this.gameState = gameState;
         this.map = map;

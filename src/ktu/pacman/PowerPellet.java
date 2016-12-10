@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class PowerPellet implements Food
 {
-    private GameMap map;
+    private IGameMap map;
     private int value = 10;
     private List<Point> powerpellets;
     
-    PowerPellet(GameMap map) {
+    PowerPellet(IGameMap map) {
         this.map = map;
     }
     

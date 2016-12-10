@@ -12,9 +12,9 @@ import java.awt.Point;
  *
  * @author Justinas
  */
-public class GameMap
+public class GameMap extends IGameMap
 {
-    public char map[][];
+    // public char map[][];
 
     public GameMap( String[] map )
     {

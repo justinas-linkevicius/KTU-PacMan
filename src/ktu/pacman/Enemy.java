@@ -16,7 +16,7 @@ public abstract class Enemy implements Cloneable
 {
     public char enemyId = '\0';
     
-    protected GameMap map;
+    protected IGameMap map;
     
     // current enemy position & last direction
     protected Point   position;
@@ -31,13 +31,13 @@ public abstract class Enemy implements Cloneable
     protected BehaviorAlgorithm behavior;
   
     // observer
-    protected GameState gameState;
+    protected IGameState gameState;
     public abstract void updateState();
     
     // stop from moving for one cycle
     protected boolean freeze = false;
         
-    public Enemy(GameMap m, Point p, GameState g, CollisionHandler c)
+    public Enemy(IGameMap m, Point p, IGameState g, CollisionHandler c)
     {
         this.gameState = g;
         this.map       = m;

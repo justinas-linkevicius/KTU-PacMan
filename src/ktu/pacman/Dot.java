@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class Dot implements Food
 {
-    private GameMap map;
+    private IGameMap map;
     private int value = 1;
     private List<Point> dots;
 
-    Dot(GameMap map) {
+    Dot(IGameMap map) {
         this.map = map;
         this.dots = this.findAllFood();
     }
