@@ -46,9 +46,11 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
       private Enemy inky;
       private Enemy pinky;
       
+      private Enemy clone;
+      
       // private BufferedImage image;
       
-      public GameMapPanel()
+      public GameMapPanel() throws CloneNotSupportedException
       {
         this.map = new GameMap(new String[]
         { 
@@ -58,9 +60,9 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
             "1.1                 ..              1 1",
             "1 1  1 1  .  1  1                 1 1 1",
             "1.1  1 1     1  1  1pb111111111   1 1 1",
-            "1 1  1 1  .  1  1  1ci1 . . . 1   1 1 1",
+            "1 1  1 1  .  1  1  1 i1 . . . 1   1 1 1",
             "1.1  1 1     1  1  1  1 1111111   1 1 1",
-            "1 1  1 1  .  1  1                 1 1 1",
+            "1 1  1 1  .  1  1  c              1 1 1",
             "1.1  1 1     1  1  111111111111   1 1 1",
             "1 1  1 1  .  1  1  . .  . . . .   1 1 1",
             "1.1  1 1     1 111111111111111111 1 1 1",
@@ -130,6 +132,10 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         this.inky.setBehavior(  new RandomBehavior() );
         this.pinky.setBehavior( new RandomBehavior2() );
         
+        // prototype
+        this.clone = binky.clone();
+        this.clone.setPosition(1,1);
+        
         // get food factory
         MapElementFactory foodFactory = MapElementFactoryProducer.getFactory("Food");
         
@@ -188,8 +194,11 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         
         this.binky.update();
         this.clyde.update();
-        //this.inky.update();
-        //this.pinky.update();
+        this.inky.update();
+        this.pinky.update();
+        
+        if( clone != null ) 
+           this.clone.update();
         
         this.pacman.update();
         
@@ -234,6 +243,12 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
                 if(map.get(i,j) == 'c')
                 {
                     cells.add( new MapPoint(j, i, Color.ORANGE ) );
+                }
+                
+                // clone
+                if(map.get(i,j) == 'x')
+                {
+                    cells.add( new MapPoint(j, i, Color.magenta ) );
                 }
                 
                 // power pellets

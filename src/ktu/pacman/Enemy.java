@@ -12,9 +12,9 @@ import ktu.pacman.collisionHandler.*;
  *
  * @author Justinas
  */
-public abstract class Enemy
+public abstract class Enemy implements Cloneable
 {
-    protected char enemyId = '\0';
+    public char enemyId = '\0';
     
     protected GameMap map;
     
@@ -71,5 +71,17 @@ public abstract class Enemy
     public boolean isFrozen()
     {
         return freeze;
+    }
+    
+    public void setPosition(int x, int y)
+    {
+        position = new Point(x, y);
+        map.set(x, y, enemyId);
+    }
+    
+    @Override
+    public Enemy clone() throws CloneNotSupportedException
+    {
+       return (Enemy) super.clone();
     }
 }

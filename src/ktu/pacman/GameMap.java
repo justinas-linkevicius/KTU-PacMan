@@ -62,6 +62,11 @@ public class GameMap
         this.map[ p.x ][ p.y ] = s;
     }
     
+    public void set(int x, int y, char s)
+    {
+        this.map[ x ][ y ] = s;
+    }
+    
     public int width()
     {
         return this.map[0].length;

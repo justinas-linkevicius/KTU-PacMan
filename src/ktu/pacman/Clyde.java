@@ -14,13 +14,16 @@ import ktu.pacman.collisionHandler.*;
  */
 public class Clyde extends Enemy
 {
-
     public Clyde(GameMap m, Point p, GameState g, CollisionHandler c)
     {
         super(m, p, g, c);
-        this.gameState.addEnemy(this);
         
-        System.out.println("Generated Clyde");
+        enemyId = 'c';
+        
+        this.gameState.addEnemy(this);
+        this.findPosition();
+        
+        System.out.println("Generated Binky");
     }
     
     public void setBehavior( BehaviorAlgorithm b )
@@ -64,7 +67,7 @@ public class Clyde extends Enemy
                 previousChar = '\0';
 
             // set new position
-            this.map.set(position, 'c');            
+            this.map.set(position, enemyId);            
         }
 
         if(isFrozen())
@@ -80,25 +83,27 @@ public class Clyde extends Enemy
         
         for(int i = 0; i < map.map.length; i++)
             for(int j = 0; j < map.map[0].length; j++)
-                if(map.map[i][j] == 'c')
+                if(map.map[i][j] == enemyId)
                 {
                     this.position = new Point(i,j);
                     found = true;
                 }
-                 
+          
+        
         if(!found)
-            System.out.println("Clyde not found in map string");
+            System.out.println("Binky not found in map string");
         else
-            System.out.println("Clyde found: " + this.position.x + "x" + this.position.y );
+            System.out.println("Binky found: " + this.position.x + "x" + this.position.y );
+        
     }
 
     @Override
     public void updateState() {
-        System.out.println("Clyde: updating state");
+        System.out.println("Binky: updating state");
         
         if(gameState.getEnemyState() == 2)
         {
-            this.behavior = new RandomBehavior();
+            this.behavior = new RandomBehavior2();
         }
     }
 }

@@ -17,7 +17,11 @@ public class Inky extends Enemy
     public Inky(GameMap m, Point p, GameState g,  CollisionHandler c)
     {
         super(m, p, g, c);
+        
+        enemyId = 'i';
+        
         this.gameState.addEnemy(this);
+        this.findPosition();
         
         System.out.println("Generated Inky");
     }
@@ -39,50 +43,68 @@ public class Inky extends Enemy
         return this.position;
     }
     
+    @Override
     public void update()
     {
-        this.findPosition();
+        // get the new direction
+        direction = this.behavior.move(map, position, pacmanPos);
+           
+        // check for collision
+        this.collisionHandler.handle(this);
         
-        DirectionEnum direction = this.behavior.move(map, position, pacmanPos);
-        
-        // update map
-        if(previousChar == '\0')
-            this.map.set(position, ' ');
-        else
-            this.map.set(position, previousChar);
-        
-        // new position after move
-        this.position = Direction.directionToPoint(position, direction);
-        
-        // remember old symbol
-        previousChar = this.map.get(position);
-        if(previousChar == '*')
-            previousChar = '\0';
-        
-        // set new position
-        this.map.set(position, 'i');
+        if(!isFrozen())
+        {
+            if(previousChar == '\0')
+                this.map.set(position, ' ');
+            else
+                this.map.set(position, previousChar);
+
+            // new position after move
+            this.position = Direction.directionToPoint(position, direction);
+
+            // remember old symbol
+            previousChar = this.map.get(position);
+            if(previousChar == '*')
+                previousChar = '\0';
+
+            // set new position
+            this.map.set(position, enemyId);            
+        }
+
+        if(isFrozen())
+        {
+            unfreeze();
+        }
     }
 
+    @Override
     public void findPosition()
     {
         boolean found = false;
         
         for(int i = 0; i < map.map.length; i++)
             for(int j = 0; j < map.map[0].length; j++)
-                if(map.map[i][j] == 'i')
+                if(map.map[i][j] == enemyId)
                 {
                     this.position = new Point(i,j);
                     found = true;
                 }
-                 
+          
+        
         if(!found)
             System.out.println("Inky not found in map string");
         else
             System.out.println("Inky found: " + this.position.x + "x" + this.position.y );
+        
     }
 
     @Override
     public void updateState() {
-        System.out.println("Inky: updatingState()");
+        System.out.println("Inky: updating state");
+        
+        if(gameState.getEnemyState() == 2)
+        {
+            this.behavior = new RandomBehavior2();
+        }
     }
 }

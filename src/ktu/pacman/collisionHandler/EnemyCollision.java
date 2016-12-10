@@ -19,7 +19,7 @@ public class EnemyCollision extends CollisionHandler
     
     public boolean isColision()
     {
-        System.out.println( enemy.nextElement() );
+        //System.out.println( enemy.enemyId + " collides with '" + enemy.nextElement() + "'");
         
         for(int i = 0; i < collisionElements.length(); i++)
             if( enemy.nextElement() == collisionElements.charAt(i) )
@@ -45,6 +45,14 @@ public class EnemyCollision extends CollisionHandler
             
             switch(collisionWith)
             {
+                // freeze when colliding with other enemies
+                case 'b': 
+                case 'c':
+                case 'i':
+                case 'p':
+                    enemy.freeze();
+                break;
+                
                 // collision with food: .$
                 case '.':
                     System.out.println("Enemy collision with food .");
