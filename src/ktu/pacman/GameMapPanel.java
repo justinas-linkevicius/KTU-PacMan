@@ -99,12 +99,15 @@ public class GameMapPanel extends JPanel implements KeyEventDispatcher
         // ChainOfResponsibility
         CollisionHandler collisionHandler;
         
+        // collision handlers
         CollisionHandler pacmanCollision = new PacManCollision();
         CollisionHandler enemyCollision = new EnemyCollision();
-                
+        CollisionHandler nullColision = new NullCollision();
+        
         // build the chain
         collisionHandler = pacmanCollision;
         collisionHandler.setNext(enemyCollision);
+        enemyCollision.setNext(nullColision);
         
         // observer
         GameState gameState = new GameState();

@@ -71,7 +71,7 @@ public class EnemyCollision extends CollisionHandler
         {
             this.enemy = (Enemy) o;
             this.handleCollision();
-        } else if(this.next != null)
+        } else
         {
             this.next.handle(o);
         }

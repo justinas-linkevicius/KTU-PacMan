@@ -82,7 +82,7 @@ public class PacManCollision extends CollisionHandler
         {
             this.pacman = (PacMan) o;
             this.handleCollision();
-        } else if(this.next != null)
+        } else
         {
             this.next.handle(o);
         }
