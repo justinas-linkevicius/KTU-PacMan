@@ -55,11 +55,11 @@ public class EnemyCollision extends CollisionHandler
                 
                 // collision with food: .$
                 case '.':
-                    System.out.println("Enemy collision with food .");
+                    //System.out.println("Enemy collision with food .");
                 break;
                     
                 case '$':
-                    System.out.println("Enemy collision with food $");
+                    //System.out.println("Enemy collision with food $");
                 break;
                     
                 // collision with pacman: *
